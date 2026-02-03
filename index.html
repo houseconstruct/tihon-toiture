@@ -438,45 +438,32 @@ body::before {
 © Tihon Toiture – Tous droits réservés
 </footer>
 
+<h2 data-fr="Compétences clés" data-nl="Belangrijkste vaardigheden">
+  Compétences clés
+</h2>
+
+<ul>
+  <li data-fr="Rénovation de toitures" data-nl="Dakrenovatie">
+    Rénovation de toitures
+  </li>
+  <li data-fr="Réparation de fuites" data-nl="Herstelling van lekken">
+    Réparation de fuites
+  </li>
+  <li data-fr="Isolation et étanchéité" data-nl="Isolatie en waterdichting">
+    Isolation et étanchéité
+  </li>
+  <li data-fr="Entretien et nettoyage" data-nl="Onderhoud en reiniging">
+    Entretien et nettoyage
+  </li>
+</ul>
+  
 <script>
-const translations = {
-  fr: {
-    skills_title: "Compétences clés",
-    skill_renovation: "Rénovation de toitures",
-    skill_repair: "Réparation de fuites",
-    skill_isolation: "Isolation et étanchéité",
-    skill_cleaning: "Entretien et nettoyage",
-    quality_1: "Sérieux, ponctuel, travail propre et précis.",
-    quality_2: "Autonome, fiable, bon contact client."
-  },
-  nl: {
-    skills_title: "Belangrijkste vaardigheden",
-    skill_renovation: "Dakrenovatie",
-    skill_repair: "Herstelling van lekken",
-    skill_isolation: "Isolatie en waterdichting",
-    skill_cleaning: "Onderhoud en reiniging",
-    quality_1: "Stipt, netjes en precies werk.",
-    quality_2: "Zelfstandig, betrouwbaar, goed klantencontact."
-  }
-};
-
-function setLang(lang) {
-
-  // 🔹 pentru elementele cu data-fr / data-nl
-  document.querySelectorAll('[data-fr], [data-nl]').forEach(el => {
-    const value = el.getAttribute('data-' + lang);
-    if (value) el.innerText = value;
-  });
-
-  // 🔹 pentru elementele cu data-key
-  document.querySelectorAll('[data-key]').forEach(el => {
-    const key = el.getAttribute('data-key');
-    if (translations[lang] && translations[lang][key]) {
-      el.innerText = translations[lang][key];
-    }
+function switchLang(lang) {
+  document.querySelectorAll("[data-" + lang + "]").forEach(el => {
+    el.innerText = el.getAttribute("data-" + lang);
   });
 }
 </script>
-  
+
 </body>
 </html>
