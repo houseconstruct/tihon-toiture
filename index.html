@@ -195,15 +195,26 @@ body {
   background: rgba(0,0,0,0.6);
   z-index: -1;
 }
+  html, body {
+  height: 100%;
+  margin: 0;
 }
-header {
+
+body {
   background-image: url("images/photo_2026-02-03_17-29-52.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff;
+}
 
-  min-height: 300px;   /* OBLIGATORIU */
-  padding: 40px 20px;  /* ca să se vadă frumos */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: -1;
 }
 </style>
 </head>
