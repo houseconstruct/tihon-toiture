@@ -499,13 +499,13 @@ body::before {
     Entretien et nettoyage
   </li>
 </ul>
-  
-<script>
-function switchLang(lang) {
-  document.querySelectorAll("[data-fr][data-nl]").forEach(el => {
-    el.textContent = el.getAttribute("data-" + lang);
+  <script>
+function setLang(lang){
+  document.querySelectorAll("[data-fr]").forEach(el=>{
+    el.textContent = el.getAttribute("data-"+lang);
   });
 }
+setLang("fr");
 </script>
 
 </body>
