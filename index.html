@@ -111,11 +111,10 @@ footer{
   </p>
 </header>
   <section class="presentation">
-  <p>
-    data-fr="Couvreur / entrepreneur en travaux de toiture avec une solide expérience dans la rénovation, la réparation et l’entretien de toitures. Spécialisé dans les toitures en tuiles et ardoises, l’étanchéité, l’isolation et les réparations urgentes. Travail soigné, respect des délais et des normes de sécurité. Actif sur toute la Belgique, orienté satisfaction client et solutions durables."
-    data-nl="Dakwerker / aannemer dakwerken met ruime ervaring in renovatie, herstelling en onderhoud van daken. Gespecialiseerd in pannendaken en leien, waterdichting, isolatie en dringende herstellingen. Nauwkeurig werk, respect voor deadlines en veiligheidsnormen. Actief in heel België, gericht op klanttevredenheid en duurzame oplossingen.">
+  <p data-fr="Couvreur / entrepreneur en travaux de toiture avec une solide expérience dans la rénovation, la réparation et l’entretien."
+    data-nl="Dakwerker / aannemer dakwerken met ruime ervaring in renovatie, herstelling en onderhoud.">
     
-    Couvreur / entrepreneur en travaux de toiture avec une solide expérience dans la rénovation, la réparation et l’entretien de toitures.
+    Couvreur / entrepreneur en travaux de toiture avec une solide expérience dans la rénovation, la réparation et l’entretien.
   </p>
 
   <h3>🔧 Compétences clés</h3>
@@ -172,14 +171,32 @@ Couvreur professionnel spécialisé en rénovation, réparation et entretien de 
 <img src="images/IMG_7701.jpeg">
 </div>
 </section>
-
 <section>
-<h2 data-fr="Contact" data-nl="Contact">Contact</h2>
-<p><strong>Entreprise:</strong> Tihon Toiture</p>
-<p><strong>Zone:</strong> Belgique</p>
+  <h2 data-fr="Contact" data-nl="Contact">Contact</h2>
 
-<a class="btn" href="tel:+32487770107,0487770107">📞 Appeler</a>
-<a class="btn" href="mailto:tihontoiture@gmail.com">✉️ Email</a>
+  <p data-fr="Entreprise : Tihon Toiture"
+     data-nl="Bedrijf : Tihon Toiture">
+     Entreprise : Tihon Toiture
+  </p>
+
+  <p data-fr="Zone : Belgique"
+     data-nl="Zone : België">
+     Zone : Belgique
+  </p>
+
+  <a class="btn"
+     href="tel:+32487770107"
+     data-fr="📞 Appeler : 0487 77 01 07"
+     data-nl="📞 Bellen : 0487 77 01 07">
+     📞 Appeler : 0487 77 01 07
+  </a>
+
+  <a class="btn"
+     href="mailto:tihontoiture@gmail.com"
+     data-fr="✉ Email : tihontoiture@gmail.com"
+     data-nl="✉ E-mail : tihontoiture@gmail.com">
+     ✉ Email : tihontoiture@gmail.com
+  </a>
 </section>
 
 <footer>
@@ -188,8 +205,8 @@ Couvreur professionnel spécialisé en rénovation, réparation et entretien de 
 
 <script>
 function setLang(lang){
-  document.querySelectorAll('[data-fr]').forEach(el=>{
-    el.innerText=el.getAttribute('data-'+lang);
+  document.querySelectorAll('[data-fr], [data-nl]').forEach(el => {
+    el.innerText = el.getAttribute('data-' + lang);
   });
 }
 </script>
