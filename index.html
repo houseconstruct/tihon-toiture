@@ -98,14 +98,71 @@ footer{
   align-items:center;
   gap:12px;
 }
+header {
+  background: #1f2933;
+  padding: 20px 40px;
+  border-bottom: 2px solid #f5c542;
+}
+
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 15px;
 }
-.logo{
-  height:50px;
+
+.logo {
+  height: 60px;
 }
+
+.logo-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #f5c542;
+}
+
+header p {
+  margin-left: 75px;
+  margin-top: 4px;
+  color: #cbd5e1;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+ .testimonials {
+  background: #111827;
+  padding: 60px 40px;
+  border-top: 2px solid #f5c542;
+}
+
+.testimonials h2 {
+  color: #f5c542;
+  margin-bottom: 30px;
+  font-size: 26px;
+}
+
+.testimonial-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.testimonial {
+  background: #1f2933;
+  padding: 25px;
+  border-left: 4px solid #f5c542;
+  border-radius: 6px;
+}
+
+.testimonial p {
+  font-style: italic;
+  color: #e5e7eb;
+  margin-bottom: 15px;
+}
+
+.testimonial span {
+  font-weight: bold;
+  color: #f5c542;
+  font-size: 14px;
+} 
 </style>
 </head>
 
@@ -177,7 +234,55 @@ footer{
   </p>
 
 </section>
+  
+<section class="testimonials">
+  <h2>Témoignages clients</h2>
 
+  <div class="testimonial-list">
+    <div class="testimonial">
+      <p>
+        “Travail impeccable, rapide et très professionnel.
+        Le chantier a été laissé propre et les délais respectés.”
+      </p>
+      <span>— Marc D., Liège</span>
+    </div>
+
+    <div class="testimonial">
+      <p>
+        “Excellent contact, devis clair et intervention rapide
+        après une fuite urgente.”
+      </p>
+      <span>— Sophie L., Bruxelles</span>
+    </div>
+
+    <div class="testimonial">
+      <p>
+        “Je recommande vivement. Toiture rénovée avec soin
+        et matériaux de qualité.”
+      </p>
+      <span>— Ahmed K., Charleroi</span>
+    </div>
+  </div>
+</section>
+  
+<section class="coverage">
+  <h2>Zone d’intervention</h2>
+
+  <p>
+    Intervention rapide sur toute la Belgique
+    pour travaux de toiture, rénovation et réparations urgentes.
+  </p>
+
+  <ul>
+    <li>Bruxelles & Brabant</li>
+    <li>Liège et province</li>
+    <li>Namur</li>
+    <li>Hainaut (Charleroi, Mons)</li>
+    <li>Anvers</li>
+    <li>Partout en Belgique</li>
+  </ul>
+</section>
+  
 <section>
 <h2 data-fr="Galerie" data-nl="Galerij">Galerie</h2>
 
