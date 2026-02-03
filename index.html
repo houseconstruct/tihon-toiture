@@ -175,8 +175,26 @@ header p {
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(0,0,0,0.4);
 }
- body {
-  background: #111;
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-image: url("images/photo_2026-02-03_17-29-52.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff;
+}
+  body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: -1;
+}
 }
 header {
   background-image: url("images/photo_2026-02-03_17-29-52.jpg");
