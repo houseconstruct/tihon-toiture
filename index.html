@@ -93,6 +93,15 @@ footer{
   color:#aaa;
   border-top:1px solid #333;
 }
+  .logo-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo{
+  height:50px;
+}
 </style>
 </head>
 
@@ -104,7 +113,10 @@ footer{
     <button onclick="setLang('nl')">NL</button>
   </div>
 
-  <h1>Tihon Toiture</h1>
+  <h1 class="logo-title">
+  <img src="logo.jpg" alt="Tihon Toiture logo" class="logo">
+  Tihon Toiture
+</h1>
   <p data-fr="Travaux de toiture – Belgique"
      data-nl="Dakwerken – België">
      Travaux de toiture – Belgique
