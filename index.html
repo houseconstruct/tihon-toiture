@@ -216,13 +216,17 @@ body::before {
   background: rgba(0,0,0,0.6);
   z-index: -1;
 }
-  .coverage {
-  text-align: center;
+.map-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-.coverage ul {
-  list-style-position: inside;
-  padding-left: 0;
+.map-container iframe {
+  width: 100%;
+  max-width: 600px;
+  height: 250px;
+  border: 0;
 }
 </style>
 </head>
