@@ -254,6 +254,21 @@ body::before {
   height: 250px;
   border: 0;
 }
+  #lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+}
 </style>
 </head>
 
@@ -432,6 +447,10 @@ Couvreur / entrepreneur en travaux de toiture avec une solide expérience dans l
 </div>
 </section>
   
+  <div id="lightbox" onclick="closeImg()">
+  <img id="lightbox-img">
+</div>
+  
   <section>
   <h2 data-fr="Contact" data-nl="Contact">Contact</h2>
 
@@ -473,13 +492,23 @@ Couvreur / entrepreneur en travaux de toiture avec une solide expérience dans l
 © Tihon Toiture – Tous droits réservés
 </footer>
 
-  <script>
+<script>
 function setLang(lang){
   document.querySelectorAll("[data-fr]").forEach(el=>{
     el.textContent = el.getAttribute("data-"+lang);
   });
 }
 setLang("fr");
+
+/* ===== LIGHTBOX IMAGINI ===== */
+function openImg(src) {
+  document.getElementById("lightbox").style.display = "flex";
+  document.getElementById("lightbox-img").src = src;
+}
+
+function closeImg() {
+  document.getElementById("lightbox").style.display = "none";
+}
 </script>
 
 </body>
