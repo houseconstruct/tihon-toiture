@@ -269,6 +269,16 @@ body::before {
   max-height: 90%;
   border-radius: 12px;
 }
+  .stars span {
+  font-size: 28px;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.2s;
+}
+
+.stars span.active {
+  color: gold;
+}
 </style>
 </head>
 
@@ -487,6 +497,20 @@ Couvreur / entrepreneur en travaux de toiture avec une solide expérience dans l
 📍 Vezi pe hartă
 </a>
 </section>
+
+  <div id="rating-box">
+  <div class="stars">
+    <span data-value="1">★</span>
+    <span data-value="2">★</span>
+    <span data-value="3">★</span>
+    <span data-value="4">★</span>
+    <span data-value="5">★</span>
+  </div>
+  <div id="rating-info">
+    ⭐ <span id="average">0.0</span> / 5  
+    (<span id="votes">0</span> voturi)
+  </div>
+</div>
   
 <footer>
 © Tihon Toiture – Tous droits réservés
@@ -509,6 +533,41 @@ function openImg(src) {
 function closeImg() {
   document.getElementById("lightbox").style.display = "none";
 }
+  // ===== RATING STARS =====
+const API_URL = "https://script.google.com/macros/s/AKfycbw7BwEC3QiM171E8f5pfUDQ8SwK9-k2zSRxx7D7EODI5ZLJu4BDeajJPbw7L4GzAGGV/exec";
+
+const stars = document.querySelectorAll(".stars span");
+const avgEl = document.getElementById("average");
+const votesEl = document.getElementById("votes");
+
+function highlightStars(value) {
+  stars.forEach(s => {
+    s.classList.toggle("active", Number(s.dataset.value) <= value);
+  });
+}
+
+stars.forEach(star => {
+  star.addEventListener("click", () => {
+    const value = Number(star.dataset.value);
+
+    fetch(API_URL + "?rating=" + value)
+      .then(r => r.json())
+      .then(data => {
+        avgEl.textContent = data.average.toFixed(1);
+        votesEl.textContent = data.votes;
+      });
+
+    highlightStars(value);
+  });
+});
+
+// încarcă media + voturile existente
+fetch(API_URL)
+  .then(r => r.json())
+  .then(data => {
+    avgEl.textContent = data.average.toFixed(1);
+    votesEl.textContent = data.votes;
+  });
 </script>
 
 </body>
