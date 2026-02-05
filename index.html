@@ -563,38 +563,45 @@ function closeImg() {
   // ===== RATING STARS =====
 const API_URL = "https://script.google.com/macros/s/AKfycbw7BwEC3QiM171E8f5pfUDQ8SwK9-k2zSRxx7D7EODI5ZLJu4BDeajJPbw7L4GzAGGV/exec";
 
-const stars = document.querySelectorAll(".stars span");
-const avgEl = document.getElementById("average");
-const votesEl = document.getElementById("votes");
+const stars = document.querySelectorAll('#rating-box .stars span');
+const avgEl = document.querySelector('.avg');
+const votesEl = document.querySelector('.votes');
+
+let totalVotes = Number(localStorage.getItem('votes')) || 0;
+let totalScore = Number(localStorage.getItem('score')) || 0;
+
+function updateDisplay() {
+  if (totalVotes === 0) {
+    avgEl.textContent = '0.0';
+    votesEl.textContent = '0';
+    return;
+  }
+  avgEl.textContent = (totalScore / totalVotes).toFixed(1);
+  votesEl.textContent = totalVotes;
+}
 
 function highlightStars(value) {
   stars.forEach(s => {
-    s.classList.toggle("active", Number(s.dataset.value) <= value);
+    s.classList.toggle('active', Number(s.dataset.value) <= value);
   });
 }
 
 stars.forEach(star => {
-  star.addEventListener("click", () => {
+  star.addEventListener('click', () => {
     const value = Number(star.dataset.value);
 
-    fetch(API_URL + "?rating=" + value)
-      .then(r => r.json())
-      .then(data => {
-        avgEl.textContent = data.average.toFixed(1);
-        votesEl.textContent = data.votes;
-      });
+    totalVotes++;
+    totalScore += value;
+
+    localStorage.setItem('votes', totalVotes);
+    localStorage.setItem('score', totalScore);
 
     highlightStars(value);
+    updateDisplay();
   });
 });
 
-// încarcă media + voturile existente
-fetch(API_URL)
-  .then(r => r.json())
-  .then(data => {
-    avgEl.textContent = data.average.toFixed(1);
-    votesEl.textContent = data.votes;
-  });
+updateDisplay();
 </script>
 
 </body>
