@@ -544,72 +544,83 @@ Couvreur / entrepreneur en travaux de toiture avec une solide expérience dans l
 </footer>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-function setLang(lang){
-  document.querySelectorAll("[data-fr]").forEach(el=>{
-    el.textContent = el.getAttribute("data-"+lang);
-  });
-}
-setLang("fr");
+document.addEventListener('DOMContentLoaded', () => {
 
-/* ===== LIGHTBOX IMAGINI ===== */
-function openImg(src) {
-  document.getElementById("lightbox").style.display = "flex";
-  document.getElementById("lightbox-img").src = src;
-}
+  /* ================= LIMBA RO / FR ================= */
 
-function closeImg() {
-  document.getElementById("lightbox").style.display = "none";
-}
-  // ===== RATING STARS =====
-const API_URL = "https://script.google.com/macros/s/AKfycbw7BwEC3QiM171E8f5pfUDQ8SwK9-k2zSRxx7D7EODI5ZLJu4BDeajJPbw7L4GzAGGV/exec";
-
-const stars = document.querySelectorAll('#rating-box .stars span');
-const avgEl = document.querySelector('.avg');
-const votesEl = document.querySelector('.votes');
-
-let totalVotes = Number(localStorage.getItem('votes')) || 0;
-let totalScore = Number(localStorage.getItem('score')) || 0;
-
-function updateDisplay() {
-  if (totalVotes === 0) {
-    avgEl.textContent = '0.0';
-    votesEl.textContent = '0';
-    return;
+  function setLang(lang) {
+    document.querySelectorAll('[data-fr]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (text) el.textContent = text;
+    });
+    localStorage.setItem('lang', lang);
   }
 
-  avgEl.textContent = (totalScore / totalVotes).toFixed(1);
-  votesEl.textContent = totalVotes;
-}
+  const savedLang = localStorage.getItem('lang') || 'fr';
+  setLang(savedLang);
 
-function highlightStars(value) {
-  stars.forEach(s => {
-    s.classList.toggle('active', Number(s.dataset.value) <= value);
-  });
-}
-stars.forEach(star => {
-  star.addEventListener('click', () => {
-    const value = Number(star.dataset.value);
+  window.setLang = setLang; // ca să meargă onclick din HTML
 
-    totalVotes++;
+
+  /* ================= LIGHTBOX IMAGINI ================= */
+
+  window.openImg = function (src) {
+    document.getElementById('lightbox').style.display = 'flex';
+    document.getElementById('lightbox-img').src = src;
+  }
+
+  window.closeImg = function () {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+
+
+  /* ================= RATING STELE ================= */
+
+  const stars = document.querySelectorAll('#rating-box .stars span');
+  const avgEl = document.querySelector('.avg');
+  const votesEl = document.querySelector('#votes');
+
+  let totalVotes = Number(localStorage.getItem('votes')) || 0;
+  let totalScore = Number(localStorage.getItem('score')) || 0;
+
+  function updateDisplay() {
+    if (totalVotes === 0) {
+      avgEl.textContent = '0.0';
+      votesEl.textContent = '0';
+      return;
+    }
+    avgEl.textContent = (totalScore / totalVotes).toFixed(1);
+    votesEl.textContent = totalVotes;
+  }
+
+  function highlightStars(value) {
+    stars.forEach(star => {
+      star.classList.toggle('active', Number(star.dataset.value) <= value);
+    });
+  }
+
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      const value = Number(star.dataset.value);
+
+      totalVotes++;
       totalScore += value;
 
       localStorage.setItem('votes', totalVotes);
       localStorage.setItem('score', totalScore);
 
-      highlightStars(value);
       updateDisplay();
+      highlightStars(value);
     });
   });
 
-  // ✅ AICI, NU AFARĂ
   updateDisplay();
 
   if (totalVotes > 0) {
     highlightStars(Math.round(totalScore / totalVotes));
   }
 
-}); // 👈 acum e închis corect
+});
 </script>
 
 </body>
