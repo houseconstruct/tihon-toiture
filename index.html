@@ -546,12 +546,12 @@ Couvreur / entrepreneur en travaux de toiture avec une solide expérience dans l
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* =======================
-     🌍 LIMBA FR / NL
-  ======================= */
+  /* ================= LIMBA FR / NL ================= */
+
   function setLang(lang) {
     document.querySelectorAll("[data-fr]").forEach(el => {
-      el.textContent = el.getAttribute("data-" + lang);
+      const txt = el.getAttribute("data-" + lang);
+      if (txt) el.textContent = txt;
     });
     localStorage.setItem("lang", lang);
   }
@@ -559,25 +559,41 @@ document.addEventListener("DOMContentLoaded", () => {
   const savedLang = localStorage.getItem("lang") || "fr";
   setLang(savedLang);
 
-  // dacă ai butoane
-  const frBtn = document.getElementById("lang-fr");
-  const nlBtn = document.getElementById("lang-nl");
-
-  if (frBtn) frBtn.onclick = () => setLang("fr");
-  if (nlBtn) nlBtn.onclick = () => setLang("nl");
+  window.setLang = setLang;
 
 
-  /* =======================
-     ⭐ RATING STELE
-  ======================= */
+  /* ================= LIGHTBOX ================= */
+
+  window.openImg = function (src) {
+    document.getElementById("lightbox").style.display = "flex";
+    document.getElementById("lightbox-img").src = src;
+  };
+
+  window.closeImg = function () {
+    document.getElementById("lightbox").style.display = "none";
+  };
+
+
+  /* ================= RATING STELE ================= */
+
   const stars = document.querySelectorAll("#rating-box .stars span");
   const avgEl = document.querySelector(".avg");
-  const votesEl = document.querySelector(".votes");
+  const votesEl = document.getElementById("votes");
 
-  let totalVotes = Number(localStorage.getItem("votes")) || 0;
-  let totalScore = Number(localStorage.getItem("score")) || 0;
+  let votes = Number(localStorage.getItem("votes")) || 0;
+  let score = Number(localStorage.getItem("score")) || 0;
 
-  function highlightStars(value) {
+  function updateStats() {
+    if (votes === 0) {
+      avgEl.textContent = "0.0";
+      votesEl.textContent = "0";
+      return;
+    }
+    avgEl.textContent = (score / votes).toFixed(1);
+    votesEl.textContent = votes;
+  }
+
+  function paintStars(value) {
     stars.forEach(star => {
       star.classList.toggle(
         "active",
@@ -586,49 +602,43 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function updateDisplay() {
-    if (totalVotes === 0) {
-      avgEl.textContent = "0.0";
-      votesEl.textContent = "0";
-      highlightStars(0);
-      return;
-    }
-
-    const avg = (totalScore / totalVotes).toFixed(1);
-    avgEl.textContent = avg;
-    votesEl.textContent = totalVotes;
-    highlightStars(Math.round(avg));
-  }
-
-  // click pe stele
   stars.forEach(star => {
+
+    // HOVER
+    star.addEventListener("mouseenter", () => {
+      paintStars(Number(star.dataset.value));
+    });
+
+    // LEAVE
+    star.addEventListener("mouseleave", () => {
+      if (votes > 0) {
+        paintStars(Math.round(score / votes));
+      } else {
+        paintStars(0);
+      }
+    });
+
+    // CLICK (VOT)
     star.addEventListener("click", () => {
       const value = Number(star.dataset.value);
 
-      totalVotes += 1;
-      totalScore += value;
+      votes++;
+      score += value;
 
-      localStorage.setItem("votes", totalVotes);
-      localStorage.setItem("score", totalScore);
+      localStorage.setItem("votes", votes);
+      localStorage.setItem("score", score);
 
-      updateDisplay();
-    });
-
-    // hover
-    star.addEventListener("mouseenter", () => {
-      highlightStars(Number(star.dataset.value));
+      paintStars(value);
+      updateStats();
     });
   });
 
-  document
-    .querySelector("#rating-box .stars")
-    .addEventListener("mouseleave", () => {
-      if (totalVotes === 0) highlightStars(0);
-      else highlightStars(Math.round(totalScore / totalVotes));
-    });
+  updateStats();
 
-  // inițial
-  updateDisplay();
+  if (votes > 1) {
+    paintStars(Math.round(score / votes));
+  }
+
 });
 </script>
 
