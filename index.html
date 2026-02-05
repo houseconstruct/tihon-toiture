@@ -279,6 +279,22 @@ body::before {
 .stars span.active {
   color: gold;
 }
+  .map-and-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+#rating-box {
+  text-align: center;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
 </style>
 </head>
 
@@ -491,11 +507,28 @@ Couvreur / entrepreneur en travaux de toiture avec une solide expérience dans l
    data-nl="📍 Kapelleveld 76, 1742 Ternat">
 📍 Kapelleveld 76, 1742 Ternat
 </p>
-    <a class="btn"
-   href="https://www.google.com/maps/search/?api=1&query=Kapelleveld+76+1742+Ternat"
-   target="_blank">
-📍 Vezi pe hartă
-</a>
+  <div class="map-and-rating">
+  <a class="btn"
+     href="https://www.google.com/maps/search/?api=1&query=Kapelleveld+76,+1742+Ternat"
+     target="_blank">
+    📍 Vezi pe hartă
+  </a>
+
+  <div id="rating-box">
+    <div class="stars">
+      <span data-value="1">★</span>
+      <span data-value="2">★</span>
+      <span data-value="3">★</span>
+      <span data-value="4">★</span>
+      <span data-value="5">★</span>
+    </div>
+
+    <div id="rating-info">
+      ⭐ <span id="average">0.0</span> / 5
+      (<span id="votes">0</span> voturi)
+    </div>
+  </div>
+</div>
 </section>
 
   <div id="rating-box">
