@@ -561,6 +561,7 @@ function closeImg() {
   document.getElementById("lightbox").style.display = "none";
 }
   // ===== RATING STARS =====
+  document.addEventListener('DOMContentLoaded', () => {
 const API_URL = "https://script.google.com/macros/s/AKfycbw7BwEC3QiM171E8f5pfUDQ8SwK9-k2zSRxx7D7EODI5ZLJu4BDeajJPbw7L4GzAGGV/exec";
 
 const stars = document.querySelectorAll('#rating-box .stars span');
@@ -607,6 +608,8 @@ updateDisplay();
 if (totalVotes > 0) {
   highlightStars(Math.round(totalScore / totalVotes));
 }
+
+  });
 </script>
 
 </body>
