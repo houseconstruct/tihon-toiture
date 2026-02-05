@@ -576,6 +576,7 @@ function updateDisplay() {
     votesEl.textContent = '0';
     return;
   }
+
   avgEl.textContent = (totalScore / totalVotes).toFixed(1);
   votesEl.textContent = totalVotes;
 }
