@@ -544,6 +544,7 @@ Couvreur / entrepreneur en travaux de toiture avec une solide expérience dans l
 </footer>
 
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
 function setLang(lang){
   document.querySelectorAll("[data-fr]").forEach(el=>{
     el.textContent = el.getAttribute("data-"+lang);
@@ -561,7 +562,6 @@ function closeImg() {
   document.getElementById("lightbox").style.display = "none";
 }
   // ===== RATING STARS =====
-  document.addEventListener('DOMContentLoaded', () => {
 const API_URL = "https://script.google.com/macros/s/AKfycbw7BwEC3QiM171E8f5pfUDQ8SwK9-k2zSRxx7D7EODI5ZLJu4BDeajJPbw7L4GzAGGV/exec";
 
 const stars = document.querySelectorAll('#rating-box .stars span');
@@ -587,7 +587,6 @@ function highlightStars(value) {
     s.classList.toggle('active', Number(s.dataset.value) <= value);
   });
 }
-
 stars.forEach(star => {
   star.addEventListener('click', () => {
     const value = Number(star.dataset.value);
