@@ -593,23 +593,24 @@ stars.forEach(star => {
     const value = Number(star.dataset.value);
 
     totalVotes++;
-    totalScore += value;
+      totalScore += value;
 
-    localStorage.setItem('votes', totalVotes);
-    localStorage.setItem('score', totalScore);
+      localStorage.setItem('votes', totalVotes);
+      localStorage.setItem('score', totalScore);
 
-    highlightStars(value);
-    updateDisplay();
+      highlightStars(value);
+      updateDisplay();
+    });
   });
-});
 
-updateDisplay();
+  // ✅ AICI, NU AFARĂ
+  updateDisplay();
 
-if (totalVotes > 0) {
-  highlightStars(Math.round(totalScore / totalVotes));
-}
+  if (totalVotes > 0) {
+    highlightStars(Math.round(totalScore / totalVotes));
+  }
 
-  });
+}); // 👈 acum e închis corect
 </script>
 
 </body>
