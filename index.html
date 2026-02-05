@@ -603,6 +603,10 @@ stars.forEach(star => {
 });
 
 updateDisplay();
+
+if (totalVotes > 0) {
+  highlightStars(Math.round(totalScore / totalVotes));
+}
 </script>
 
 </body>
