@@ -544,80 +544,99 @@ Couvreur / entrepreneur en travaux de toiture avec une solide expérience dans l
 </footer>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-  /* ================= LIMBA RO / FR ================= */
+  /* ================= LIMBA FR / NL ================= */
 
   function setLang(lang) {
-    document.querySelectorAll('[data-fr]').forEach(el => {
-      const text = el.getAttribute('data-' + lang);
-      if (text) el.textContent = text;
+    document.querySelectorAll("[data-fr]").forEach(el => {
+      const txt = el.getAttribute("data-" + lang);
+      if (txt) el.textContent = txt;
     });
-    localStorage.setItem('lang', lang);
+    localStorage.setItem("lang", lang);
   }
 
-  const savedLang = localStorage.getItem('lang') || 'fr';
+  const savedLang = localStorage.getItem("lang") || "fr";
   setLang(savedLang);
 
-  window.setLang = setLang; // ca să meargă onclick din HTML
+  window.setLang = setLang;
 
 
-  /* ================= LIGHTBOX IMAGINI ================= */
+  /* ================= LIGHTBOX ================= */
 
   window.openImg = function (src) {
-    document.getElementById('lightbox').style.display = 'flex';
-    document.getElementById('lightbox-img').src = src;
-  }
+    document.getElementById("lightbox").style.display = "flex";
+    document.getElementById("lightbox-img").src = src;
+  };
 
   window.closeImg = function () {
-    document.getElementById('lightbox').style.display = 'none';
-  }
+    document.getElementById("lightbox").style.display = "none";
+  };
 
 
   /* ================= RATING STELE ================= */
 
-  const stars = document.querySelectorAll('#rating-box .stars span');
-  const avgEl = document.querySelector('.avg');
-  const votesEl = document.querySelector('#votes');
+  const stars = document.querySelectorAll("#rating-box .stars span");
+  const avgEl = document.querySelector(".avg");
+  const votesEl = document.getElementById("votes");
 
-  let totalVotes = Number(localStorage.getItem('votes')) || 0;
-  let totalScore = Number(localStorage.getItem('score')) || 0;
+  let votes = Number(localStorage.getItem("votes")) || 0;
+  let score = Number(localStorage.getItem("score")) || 0;
 
-  function updateDisplay() {
-    if (totalVotes === 0) {
-      avgEl.textContent = '0.0';
-      votesEl.textContent = '0';
+  function updateStats() {
+    if (votes === 0) {
+      avgEl.textContent = "0.0";
+      votesEl.textContent = "0";
       return;
     }
-    avgEl.textContent = (totalScore / totalVotes).toFixed(1);
-    votesEl.textContent = totalVotes;
+    avgEl.textContent = (score / votes).toFixed(1);
+    votesEl.textContent = votes;
   }
 
-  function highlightStars(value) {
+  function paintStars(value) {
     stars.forEach(star => {
-      star.classList.toggle('active', Number(star.dataset.value) <= value);
+      star.classList.toggle(
+        "active",
+        Number(star.dataset.value) <= value
+      );
     });
   }
 
   stars.forEach(star => {
-    star.addEventListener('click', () => {
+
+    // HOVER
+    star.addEventListener("mouseenter", () => {
+      paintStars(Number(star.dataset.value));
+    });
+
+    // LEAVE
+    star.addEventListener("mouseleave", () => {
+      if (votes > 0) {
+        paintStars(Math.round(score / votes));
+      } else {
+        paintStars(0);
+      }
+    });
+
+    // CLICK (VOT)
+    star.addEventListener("click", () => {
       const value = Number(star.dataset.value);
 
-      totalVotes++;
-      totalScore += value;
+      votes++;
+      score += value;
 
-      localStorage.setItem('votes', totalVotes);
-      localStorage.setItem('score', totalScore);
+      localStorage.setItem("votes", votes);
+      localStorage.setItem("score", score);
 
-      updateDisplay();
-      highlightStars(value);
+      paintStars(value);
+      updateStats();
     });
   });
 
-  updateDisplay();
+  updateStats();
 
-  if (totalVotes > 0) {
-    highlightStars(Math.round(totalScore / totalVotes));
+  if (votes > 0) {
+    paintStars(Math.round(score / votes));
   }
 
 });
